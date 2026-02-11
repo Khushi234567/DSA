@@ -51,7 +51,7 @@ class Solution {
             }
             return trap;
         }*/
-        int n = height.length;
+       /* int n = height.length;
         if(n == 0){
             return 0;
         }
@@ -74,7 +74,34 @@ class Solution {
 
             trap += waterLevel - height[i];
         }
+        return trap;*/
+
+        int n = height.length;
+        if(n == 0){
+            return 0;
+
+        }
+        //leftmost
+        int leftMost[] = new int[n];
+        leftMost[0] = height[0];
+        for(int i = 1; i < n; i++){
+            leftMost[i] = Math.max(height[i],leftMost[i-1]);
+        }
+        int rightMost[] = new int[n];
+        rightMost[n-1] = height[n-1];
+        for(int i = n-2;i>= 0;i--){
+            rightMost[i] = Math.max(height[i],rightMost[i+1]);
+        }
+        int trap = 0;
+        for(int i = 0; i < n; i++){
+            int waterLevel = Math.min(leftMost[i],rightMost[i]);
+            trap += waterLevel - height[i];
+        }
         return trap;
 
+        }
+        
+    
+
     }
-    }
+    
